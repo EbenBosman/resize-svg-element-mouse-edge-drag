@@ -1,7 +1,8 @@
 import React from "react";
 
+const svgId = "graph-svg";
 const componentId = "some-element";
-const leftEdgeLine = "some-element-left-edge-resize-line";
+const leftEdgeLineId = "some-element-left-edge-resize-line";
 
 class ResizeableRect extends React.Component {
   state = {
@@ -14,21 +15,23 @@ class ResizeableRect extends React.Component {
   };
 
   componentDidMount() {
-    const element = document.getElementById(leftEdgeLine);
-    element.addEventListener("mouseover", this.hoverOverLeftEdge);
-    element.addEventListener("mouseout", this.hoverOutLeftEdge);
-    element.addEventListener("mousedown", this.mouseDown);
-    element.addEventListener("mouseup", this.mouseUp);
-    element.addEventListener("mousemove", this.mouseMove);
+    const edge = document.getElementById(leftEdgeLineId);
+    const svg = document.getElementById(svgId);
+    edge.addEventListener("mouseover", this.hoverOverLeftEdge);
+    edge.addEventListener("mouseout", this.hoverOutLeftEdge);
+    svg.addEventListener("mousedown", this.mouseDown);
+    svg.addEventListener("mouseup", this.mouseUp);
+    svg.addEventListener("mousemove", this.mouseMove);
   }
 
   componentWillUnmount() {
-    const element = document.getElementById(leftEdgeLine);
-    element.removeEventListener("mouseover", this.hoverOverLeftEdge);
-    element.removeEventListener("mouseout", this.hoverOutLeftEdge);
-    element.removeEventListener("mousedown", this.mouseDown);
-    element.removeEventListener("mouseup", this.mouseUp);
-    element.removeEventListener("mousemove", this.mouseMove);
+    const edge = document.getElementById(leftEdgeLineId);
+    const svg = document.getElementById(svgId);
+    edge.removeEventListener("mouseover", this.hoverOverLeftEdge);
+    edge.removeEventListener("mouseout", this.hoverOutLeftEdge);
+    svg.removeEventListener("mousedown", this.mouseDown);
+    svg.removeEventListener("mouseup", this.mouseUp);
+    svg.removeEventListener("mousemove", this.mouseMove);
   }
 
   hoverOverLeftEdge = e => {
@@ -60,7 +63,7 @@ class ResizeableRect extends React.Component {
         3 = Right  mouse button
         */
     if (this.state && this.state.mouseDown && e.which === 1) {
-      const svg = document.getElementById("graph-svg");
+      const svg = document.getElementById(svgId);
       const pt = svg.createSVGPoint();
       pt.x = e.clientX;
       pt.y = e.clientY;
@@ -99,8 +102,8 @@ class ResizeableRect extends React.Component {
           style={style}
         />
         <path
-          id={leftEdgeLine}
-          name={leftEdgeLine}
+          id={leftEdgeLineId}
+          name={leftEdgeLineId}
           d={`M${this.state.x},${-this.props.canvasHeight + this.state.y} v${this.state.height}`}
           style={pathStyle}
         />
