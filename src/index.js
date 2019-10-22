@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
 
-import ResizeableRect from './components/ResizeableRect';
+import ResizeableRect from "./components/ResizeableRect";
 
 const rootElement = document.getElementById("root");
 
@@ -46,6 +46,15 @@ const jsx = (
                 style={{ backgroundColor: "white" }}
               >
                 <ResizeableRect canvasHeight={canvasHeight} />
+                <text
+                  x="50"
+                  y={-canvasHeight + 25}
+                  fill="black"
+                  fontSize="20px"
+                >
+                  Hold mouse over the left edge, click and hold to drag/change
+                  the blue square's size
+                </text>
               </svg>
             </div>
           </div>
